@@ -9,6 +9,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -40,9 +43,15 @@ public class Recipe {
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
 	private Set<Ingredient> ingredients;
-	
+
 	@Enumerated(value = EnumType.STRING)
 	private Difficulty difficulty;
+
+	@ManyToMany
+	@JoinTable(name = "recipe_cateogry",
+		joinColumns = @JoinColumn(name = "recipe_id"), 
+		inverseJoinColumns = @JoinColumn(name = "category_id"))
+	private Set<Category> categories;
 
 	public Long getId() {
 		return id;
