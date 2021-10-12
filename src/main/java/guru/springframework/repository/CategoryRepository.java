@@ -1,5 +1,7 @@
 package guru.springframework.repository;
 
+import java.util.Optional;
+
 import org.springframework.data.repository.CrudRepository;
 
 import guru.springframework.entity.Category;
@@ -11,4 +13,5 @@ import guru.springframework.entity.Category;
 */
 public interface CategoryRepository extends CrudRepository<Category, Long> {
 
+	Optional<Category> findByDescription(String description);
 }
